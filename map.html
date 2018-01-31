@@ -18,10 +18,28 @@
 //マップオブジェクト設定
 var mapObj;
 //区役所を緯度・軽度の初期値に設定
-var kuname="北区";
+
+//施設名、緯度経度のパラメーターの受け取り
+  var param = location.search; // アドレスの「?」以降の引数(パラメータ)を取得
+  param = param.substring(1); //先頭の?をカット
+  var pair = param.split("&"); //&で引数を分割
+  var temp = "";
+  var key = new Array();
+  for (var i=0;i<pair.length;i++){
+    temp = pair[i].split("="); //配列を=で分割
+    keyName = temp[0];
+    keyValue = temp[1];
+    //キーと値の連想配列を生成
+    key[keyName] = keyValue;
+  }
+  var name = decodeURIComponent(key["name"]);
+  var lat  = decodeURIComponent(key["lat"]);
+  var lng  = decodeURIComponent(key["lng"]);
+
+var kuname=kuname;
 var kuyakusyo=kuname+"役所";
-var posY=34.705388;
-var posX=135.51006;
+var posY=lat;
+var posX=lng;
 //左の園リストをクリックした際に、地図上に指し示すマーカーをグローバル変数で設定
 var marker2; //markerは園のアイコンに使用しているため、あえて2にしている
 var marker2posy=posY;
