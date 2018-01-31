@@ -20,7 +20,7 @@ $(function() {
 		.attr('height', height)
 		.append('g');
 	//同じディレクトリにあるgeojsonファイルをhttp経由で読み込む
-	d3.json("ku.json", function(json) {
+	d3.json("ku2.json", function(json) {
 		var projection,path;
 		//ツールチップを生成
 		var tooltip=d3.select("body").append("div").attr("class", "tip")
@@ -68,7 +68,7 @@ $(function() {
 		   .on('click', function(d) {
 			// clickされた時のインタラクション
 			if(d.properties.N03_001!=""){
-				  window.location.href=d.properties.N03_001+"?name="+d.properties.N03_004;
+				  window.location.href=d.properties.N03_001+"?name="+d.properties.N03_004+"&lat="+d.properties.lat+"&lng="+d.properties.lng;
 		   	}
 		   });
 		//区名表示ラベル追加
