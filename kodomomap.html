@@ -222,7 +222,7 @@ function attachMessage(getmarker, name, add, tel, url, zero, one, two, three, fo
 	var $sitei=$('<div class="content">'+siteistr+'</div>');
 	//該当区のみ、幼稚園、表示する
 	//区名表示
-	document.getElementById("kuname").innerHTML = kuname;
+	document.getElementById("kuname").innerHTML = kuname+"内の幼稚園・保育所等施設情報です。";
 	//以下、カテゴリーごとにアコーディオンに挿入
 	if (ku==kuname){
 		if (category=="幼稚園"){
@@ -327,7 +327,7 @@ $(function(){
 	<p>幼稚園・保育所等マップ</p>
 </div>
 <div class="summary">
-	<p><div id="kuname"></div>内の幼稚園・保育所等施設情報です。</p>
+	<p><div id="kuname"></div></p>
 </div>
 <ul class="accordion" style="float:left; width:30%">
 	<p>■︎幼稚園<img src="icon32x32d.png"><img src="icon32x32d2.png"></p>
@@ -346,6 +346,7 @@ $(function(){
 <div class="fixed">
 	<p><img src="icon32x32d0.png"><img src="icon32x32b0.png"><img src="icon32x320.png"><img src="icon32x32c0.png">は子ども・子育て支援新制度に移行している施設です。保育料は世帯の市町村民税に応じて決定します。</p>
 	<p><img src="icon32x32d20.png">は子ども・子育て支援新制度に移行していない施設です。保育料は施設が定めます。</p>
+	<p><img src="icon32x32e.png">は企業主導型です。申込等は当該施設に直接お問い合わせください。</p>
 </div>
 </body>
 </html>
