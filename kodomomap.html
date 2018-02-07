@@ -165,6 +165,9 @@ function attachMessage(getmarker, name, add, tel, url, zero, one, two, three, fo
 	if (sitei==1){
 		var name2 = name + '【指定園】';
 		var siteistr = "※大阪市要支援児受入促進指定園です。詳しくは、"+"<a href="+"http://www.city.osaka.lg.jp/kodomo/page/0000280259.html"+">「大阪市要支援児受入促進指定園」</a>をご覧ください。";
+		//企業主導型保育事業の場合、施設名の前にその旨を追記
+	} else if (category=="企業主導型保育事業"){
+		var name2 = "企業主導型保育事業（認可外保育施設）</br>" + name;
 	} else {
 		var name2 = name;
 		var siteistr = "";
