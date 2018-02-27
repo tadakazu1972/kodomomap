@@ -145,7 +145,7 @@ function loadCSV( filename ){
 
 			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
 			if (data[9]=="企業主導型保育事業") {
-				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18] 調査日[21]
+				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18] 調査日:data[21]
 				attachMessage2(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18], data[21]);
 			} else {
 				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18]
@@ -280,7 +280,7 @@ function attachMessage(getmarker, name, add, tel, url, zero, one, two, three, fo
 }
 
 //企業主導型保育事業用　読み込んだcsvからinfowindowと左側に表示する施設HTML生成
-function attachMessage2(getmarker, name, add, tel, url, zero, one, two, three, four, five, month, month2, ku, posy, posx, category, sitei, sinseido, day) {
+function attachMessage2(getmarker, name, add, tel, url, zero, one, two, three, four, five, month, month2, ku, posy, posx, category, sitei, sinseido, chosabi) {
 	var urlstr;
 	//URLが空白の場合は、何も表示しない。あれば「施設情報」にURLを埋め込む
 	if (url=="") {
@@ -295,14 +295,14 @@ function attachMessage2(getmarker, name, add, tel, url, zero, one, two, three, f
 
 	var ninko="";
 	//Infowindow生成
-	var infowin = new google.maps.InfoWindow({ content:name2+"</br>"+add+"</br>"+"電話番号："+tel+"</br>"+urlstr+"空き状況（"+month+"月"+day+"日現在/"+month2+"月からの途中利用可能数"+ninko+"）</br>"+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"</br>4歳児："+four+"</br>5歳児："+five+"</br>"+siteistr+"</br>"});
+	var infowin = new google.maps.InfoWindow({ content:name2+"</br>"+add+"</br>"+"電話番号："+tel+"</br>"+urlstr+"空き状況（"+month+"月"+chosabi+"日現在/"+month2+"月からの途中利用可能数"+ninko+"）</br>"+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"</br>4歳児："+four+"</br>5歳児："+five+"</br>"+siteistr+"</br>"});
 
 	//施設情報HTML生成(cssでアコーディオンにする)
 	var $name=$('<h2>'+name2+'</h2>');
 	var $add=$('<div class="content">'+add+'</div>');
 	var $tel=$('<div class="content">'+"電話番号："+tel+'</div>');
 	var $url=$('<div class="content">'+urlstr+'</div>');
-	var $month=$('<div class="content">'+"空き状況("+month+"月"+day+"日現在/"+month2+"月からの途中利用可能数"+ninko+")"+'</div>');
+	var $month=$('<div class="content">'+"空き状況("+month+"月"+chosabi+"日現在/"+month2+"月からの途中利用可能数"+ninko+")"+'</div>');
 	var $space=$('<div class="content">'+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"<br>4歳児："+four+"</br>5歳児："+five+'</div>');
 	var $sitei=$('<div class="content">'+siteistr+'</div>');
 	//該当区のみ、幼稚園、表示する
