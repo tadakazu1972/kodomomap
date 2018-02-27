@@ -146,7 +146,7 @@ function loadCSV( filename ){
 			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
 			if (data[9]=="企業主導型保育事業") {
 				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18] 調査日:data[21]
-				attachMessage2(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18], data[19]);
+				attachMessage2(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18], data[21]);
 			} else {
 				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18]
 				attachMessage(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18]);
