@@ -295,14 +295,14 @@ function attachMessage2(getmarker, name, add, tel, url, zero, one, two, three, f
 	var ninko="";
 
 	//Infowindow生成
-	var infowin = new google.maps.InfoWindow({ content:name2+"</br>"+add+"</br>"+"電話番号："+tel+"</br>"+urlstr+"空き状況（"+month+"月"+day+"日現在/"+month2+"月からの途中利用可能数"+ninko+"）</br>"+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"</br>4歳児："+four+"</br>5歳児："+five+"</br>"+siteistr+"</br>"});
+	var infowin = new google.maps.InfoWindow({ content:name2+"</br>"+add+"</br>"+"電話番号："+tel+"</br>"+urlstr+"空き状況（"+month+"月"+day+"日現在）</br>"+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"</br>4歳児："+four+"</br>5歳児："+five+"</br>"+siteistr+"</br>"});
 
 	//施設情報HTML生成(cssでアコーディオンにする)
 	var $name=$('<h2>'+name2+'</h2>');
 	var $add=$('<div class="content">'+add+'</div>');
 	var $tel=$('<div class="content">'+"電話番号："+tel+'</div>');
 	var $url=$('<div class="content">'+urlstr+'</div>');
-	var $month=$('<div class="content">'+"空き状況("+month+"月"+day+"日現在/"+month2+"月からの途中利用可能数"+ninko+")"+'</div>');
+	var $month=$('<div class="content">'+"空き状況("+month+"月"+day+"日現在)"+'</div>');
 	var $space=$('<div class="content">'+"0歳児："+zero+"</br>1歳児："+one+"</br>2歳児："+two+"</br>3歳児："+three+"<br>4歳児："+four+"</br>5歳児："+five+'</div>');
 	var $sitei=$('<div class="content">'+siteistr+'</div>');
 	//該当区のみ、幼稚園、表示する
