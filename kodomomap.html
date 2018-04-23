@@ -297,7 +297,8 @@ function loadCSV1( filename ){
       for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
         if (!regexp.test(data[j])){ data[j]="0"; }
       }
-      hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
+      var tempHoikusyo = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
+      hoikusyo.push(tempHoikusyo);
 		}
 	};
 	xhr.open("get", filename, true);
