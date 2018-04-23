@@ -42,7 +42,7 @@ body {
 	padding: 8px;
 	font-size: x-large;
 	position: fixed;
-	top: 10%;
+	top: 12%;
 	right: 10px;
 	background: #fff;
 }
@@ -52,7 +52,7 @@ body {
 	font-size: x-large;
 	position: fixed;
 	top: 12%;
-	left: 32%;
+	left: 31%;
 	background: #fff;
 }
 
@@ -96,7 +96,7 @@ body {
 		padding: 8px;
 		font-size: 4.35vw;
 		position: fixed;
-		top: 10px;
+		top: 12%;
 		right: 10px;
 		background: #fff;
 	}
@@ -107,7 +107,7 @@ body {
 		font-size: 4.35vw;
 		position: fixed;
 		top: 12%;
-		left: 10px;
+		left: 31%;
 		background: #fff;
 	}
 
