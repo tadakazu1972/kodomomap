@@ -42,7 +42,7 @@ var hoikusyo = new Array();
 //企業型クラス　グローバルオブジェクト化
 var kigyo = new Array();
 //保育所クラス　コンストラクタ　定義　csvファイルからデータを読み込んで保存しておく箱
-function Hoikusyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five, _miikou){
+function Hoikusyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five){
 	this.lat   = _lat;
 	this.lng   = _lng;
 	this.category = _category;
@@ -52,7 +52,6 @@ function Hoikusyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five
 	this.three = _three;
 	this.four  = _four;
 	this.five  = _five;
-  this.miikou = _miikou;
 }
 //企業型クラス　コンストラクタ　定義
 function Kigyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five){
@@ -221,7 +220,7 @@ function loadCSV( filename ){
         for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
           if (!regexp.test(data[j])){ data[j]="0"; }
         }
-        hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15],data[18]);
+        hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
       }
 			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
 			if (data[9]=="企業主導型保育事業") {
