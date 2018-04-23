@@ -38,6 +38,24 @@ body {
 	height:95%;
 }
 
+.radius {
+	padding: 8px;
+	font-size: x-large;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	background: #fff;
+}
+
+.checkbox {
+	padding: 8px;
+	font-size: x-large;
+	position: fixed;
+	top: 12%;
+	left: 10px;
+	background: #fff;
+}
+
 .fixed {
 	position: fixed;
 	top:82%;
@@ -68,10 +86,31 @@ body {
 		top:0;
 		left:30%;
 	}
+
 	#map_canvas {
 		width: 70%;
 		height: 100%;
 	}
+
+	.radius {
+		padding: 8px;
+		font-size: 4.35vw;
+		position: fixed;
+		top: 10px;
+		right: 10px;
+		background: #fff;
+	}
+
+  /*iPhone5sで０歳〜５歳を１行におさめるには4.35vw*/
+	.checkbox {
+		padding: 8px;
+		font-size: 4.35vw;
+		position: fixed;
+		top: 12%;
+		left: 10px;
+		background: #fff;
+	}
+	
 	.fixed {
 		position: fixed;
 		top:75%;
