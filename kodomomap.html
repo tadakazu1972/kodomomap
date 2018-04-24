@@ -79,19 +79,19 @@ for (var i=0;i<pair.length;i++){
   //キーと値の連想配列を生成
   key[keyName] = keyValue;
 }
-var name;
-var lat;
-var lng;
+var name = decodeURIComponent(key["name"]);
+var lat  = decodeURIComponent(key["lat"]);
+var lng  = decodeURIComponent(key["lng"]);
 
 //区役所を緯度・軽度の初期値に設定
-var kuname;
-var kuyakusyo;
-var posY;
-var posX;
+var kuname=name;
+var kuyakusyo=kuname+"役所";
+var posY=lat;
+var posX=lng;
 //左の園リストをクリックした際に、地図上に指し示すマーカーをグローバル変数で設定
 var marker2; //markerは園のアイコンに使用しているため、あえて2にしている
-var marker2posy;
-var marker2posx;
+var marker2posy = parseFloat(lat);;
+var marker2posx = parseFloat(lng);
 
 function init(){
   //区役所名、マップ中心表示のための緯度経度パラメーターを前ページから受け取り、パースする処理
@@ -123,7 +123,7 @@ function init(){
 
 //マップ作成
 google.maps.event.addDomListener(window, 'load', function(){
-  init();
+  //init();
 	//マップ初期設定
 	var map = document.getElementById("map_canvas");
 	var options = {
