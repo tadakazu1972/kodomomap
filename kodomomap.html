@@ -660,7 +660,7 @@ function clickRadius2(){
 
 function clickCheckbox(){
   //幼稚園マーカーはすべて灰色にする
-  for (var i=0; i<marker2Array.length; i++){
+  for (var i=0; i<markerArray2.length; i++){
     if (kindergarden[i].category=="1"){
       image = 'icon32x32d2gray.png';
     } else {
@@ -697,7 +697,7 @@ function clickCheckbox(){
 			  markerArray[i].setOptions(opt);
 		  }
       //幼稚園マーカーをすべてカラーに復活する
-      for (var i=0; i<marker2Array.length; i++){
+      for (var i=0; i<markerArray2.length; i++){
         if (kindergarden[i].category=="1"){
           image = 'icon32x32d2.png';
         } else {
