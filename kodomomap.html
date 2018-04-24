@@ -176,7 +176,7 @@ google.maps.event.addDomListener(window, 'load', function(){
       hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
 		}
 	};
-	xhr.open("get", filename, true);
+	xhr.open("get", "sukusukudata.csv", true);
 	xhr.send(null);
 
 	//幼稚園CSVファイル読み込み
