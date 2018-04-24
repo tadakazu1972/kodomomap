@@ -157,13 +157,69 @@ google.maps.event.addDomListener(window, 'load', function(){
 	mapObj.setCenter(pos);
 
 	//保育所CSVファイル読み込み
-	loadCSV1("sukusukudata.csv"); //後述の関数参照
+	//loadCSV1("sukusukudata.csv"); //後述の関数参照
+  var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		var tempArray = xhr.responseText.split("\n");
+		//バブルソート処理
+		csvArray2 = new Array();
+		csvArray3 = new Array();
+		tempArray2 = new Array();
+		var u,v;
+		for(u=0;u<tempArray.length-1;u++){
+			for(v=tempArray.length-1; v>u; v--){
+				//現時点のデータ取得
+				csvArray2 = tempArray[v].split(",");
+				var n1 = Number(csvArray2[19]);
+				//１つ前のデータ取得
+				csvArray3 = tempArray[v-1].split(",");
+				var n2 = Number(csvArray3[19]);
+				if ( n2 > n1 ) {
+					tempArray2 = tempArray[v];
+					tempArray[v] = tempArray[v-1];
+					tempArray[v-1] = tempArray2;
+				}
+			}
+		}
+		//ソート後の処理
+		csvArray = new Array();
+		for(var i=0;i<tempArray.length;i++){
+			csvArray[i] = tempArray[i].split(",");
+			var data = csvArray[i];
+			//マーカー作成　画像ファイルを読み込み
+			if (data[9]=="認定こども園") {
+			    image = 'icon32x32b.png';
+			} else if (data[9]=="地域型") {
+			    image = 'icon32x32c.png';
+			} else {
+          image = 'icon32x32.png';
+			}
+      //グローバル保存　[i]をhoikusyo[i]と合わせないとダメ
+			markerArray[i] = new google.maps.Marker({
+				position: new google.maps.LatLng( parseFloat(data[0]), parseFloat(data[1]) ),
+				map: mapObj,
+				icon: image,
+				title: data[2]
+			});
+			//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18]
+			attachMessage(markerArray[i], data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18]);
+      //保育所データであれば読み込んだデータをhoikusyoクラスに格納（幼稚園は空き状況データがないのでそもそも保存しない）
+      //前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
+      var regexp = new RegExp(/^[0-9０-９]+$/);
+      for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
+        if (!regexp.test(data[j])){ data[j]="0"; }
+      }
+      hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
+		}
+	};
+	xhr.open("get", "sukusukudata.csv", true);
+	xhr.send(null);
 
 	//幼稚園CSVファイル読み込み
-	loadCSV("sukusukudata2.csv");
+	//loadCSV("sukusukudata2.csv");
 
   //企業主導型csvファイル読込
-	loadCSV("sukusukudata3.csv");
+	//loadCSV("sukusukudata3.csv");
 
 	//zoom_changeイベント取得
 	google.maps.event.addListener(mapObj, 'zoom_changed', function(){
