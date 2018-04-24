@@ -123,6 +123,7 @@ function init(){
 
 //マップ作成
 google.maps.event.addDomListener(window, 'load', function(){
+  init();
 	//マップ初期設定
 	var map = document.getElementById("map_canvas");
 	var options = {
@@ -1449,7 +1450,7 @@ $(function(){
 });
 </script>
 </head>
-<body onload="init()">
+<body>
 <div class="header">
 	<p>幼稚園・保育所等マップ</p>
 </div>
