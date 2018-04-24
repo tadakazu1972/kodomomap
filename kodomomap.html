@@ -131,7 +131,7 @@ google.maps.event.addDomListener(window, 'load', function(){
 
 	//zoom_changeイベント取得
 	google.maps.event.addListener(mapObj, 'zoom_changed', function(){
-		var offsety; //マーカー経度調整
+		var offsety=0.001; //マーカー経度調整
 		var zoom = mapObj.getZoom();
 		if (zoom<16) { offsety=0.001;   }
 		if (zoom==16){ offsety=0.0005;  }

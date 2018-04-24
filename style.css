@@ -58,7 +58,7 @@ body {
 
 .fixed {
 	position: fixed;
-	top:70%;
+	top:50%;
 	left:30%;
 	background: #fff;
 }
