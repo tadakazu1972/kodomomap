@@ -117,8 +117,8 @@ function init(){
   //区役所を緯度・軽度の初期値に設定
   kuname=name;
   kuyakusyo=kuname+"役所";
-  posY=lat;
-  posX=lng;
+  posY=parseFloat(lat);
+  posX=parseFloat(lng);
   //左の園リストをクリックした際に、地図上に指し示すマーカーをグローバル変数で設定
   marker2posy=lat;
   alert(marker2posy);
