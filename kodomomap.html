@@ -96,6 +96,7 @@ var marker2posx;
 function init(){
   //区役所名、マップ中心表示のための緯度経度パラメーターを前ページから受け取り、パースする処理
   var param = location.search; // アドレスの「?」以降の引数(パラメータ)を取得
+  alert(param);
   param = param.substring(1); //先頭の?をカット
   var pair = param.split("&"); //&で引数を分割
   var temp = "";
