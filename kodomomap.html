@@ -39,6 +39,8 @@ var markerArray2 = new Array(); //幼稚園
 var markerArray3 = new Array(); //企業型
 //保育所クラス　グローバルオブジェクト化
 var hoikusyo = new Array();
+//幼稚園クラス　グローバルオブジェクト化
+var kindergarden = new Array();
 //企業型クラス　グローバルオブジェクト化
 var kigyo = new Array();
 //保育所クラス　コンストラクタ　定義　csvファイルからデータを読み込んで保存しておく箱
@@ -52,6 +54,10 @@ function Hoikusyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five
 	this.three = _three;
 	this.four  = _four;
 	this.five  = _five;
+}
+//幼稚園クラス　コンストラクタ
+function Kindergarden(_miikou){
+  this.miikou = _miikou;
 }
 //企業型クラス　コンストラクタ　定義
 function Kigyo(_lat, _lng, _category, _zero, _one, _two, _three, _four, _five){
@@ -126,10 +132,10 @@ google.maps.event.addDomListener(window, 'load', function(){
 	loadCSV1("sukusukudata.csv"); //後述の関数参照
 
 	//幼稚園CSVファイル読み込み
-	loadCSV("sukusukudata2.csv");
+	loadCSV2("sukusukudata2.csv");
 
   //企業主導型csvファイル読込
-	loadCSV("sukusukudata3.csv");
+	loadCSV3("sukusukudata3.csv");
 
 	//zoom_changeイベント取得
 	google.maps.event.addListener(mapObj, 'zoom_changed', function(){
@@ -299,6 +305,121 @@ function loadCSV1( filename ){
         if (!regexp.test(data[j])){ data[j]="0"; }
       }
       hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
+		}
+	};
+	xhr.open("get", filename, true);
+	xhr.send(null);
+}
+
+//幼稚園CSV読み込み処理
+function loadCSV2( filename ){
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		var tempArray = xhr.responseText.split("\n");
+		//バブルソート処理
+		csvArray2 = new Array();
+		csvArray3 = new Array();
+		tempArray2 = new Array();
+		var u,v;
+		for(u=0;u<tempArray.length-1;u++){
+			for(v=tempArray.length-1; v>u; v--){
+				//現時点のデータ取得
+				csvArray2 = tempArray[v].split(",");
+				var n1 = Number(csvArray2[19]);
+				//１つ前のデータ取得
+				csvArray3 = tempArray[v-1].split(",");
+				var n2 = Number(csvArray3[19]);
+				if ( n2 > n1 ) {
+					tempArray2 = tempArray[v];
+					tempArray[v] = tempArray[v-1];
+					tempArray[v-1] = tempArray2;
+				}
+			}
+		}
+		//ソート後の処理
+		csvArray = new Array();
+		for(var i=0;i<tempArray.length;i++){
+			csvArray[i] = tempArray[i].split(",");
+			var data = csvArray[i];
+			//マーカー作成　画像ファイルを読み込み
+		  if (data[9]=="幼稚園") {
+				if (data[18]=="1"){
+					image = 'icon32x32d2.png';
+				} else {
+					image = 'icon32x32d.png';
+				}
+      }
+      //グローバル保存　[i]をhoikusyo[i]と合わせないとダメ
+			markerArray2[i] = new google.maps.Marker({
+				position: new google.maps.LatLng( parseFloat(data[0]), parseFloat(data[1]) ),
+				map: mapObj,
+				icon: image,
+				title: data[2]
+			});
+			//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18]
+			attachMessage(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18]);
+      kindergarden[i] = new Kindergarden(data[18]);
+		}
+	};
+	xhr.open("get", filename, true);
+	xhr.send(null);
+}
+
+//企業主導型保育事業CSV読み込み処理
+function loadCSV3( filename ){
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		var tempArray = xhr.responseText.split("\n");
+		//バブルソート処理
+		csvArray2 = new Array();
+		csvArray3 = new Array();
+		tempArray2 = new Array();
+		var u,v;
+		for(u=0;u<tempArray.length-1;u++){
+			for(v=tempArray.length-1; v>u; v--){
+				//現時点のデータ取得
+				csvArray2 = tempArray[v].split(",");
+				var n1 = Number(csvArray2[19]);
+				//１つ前のデータ取得
+				csvArray3 = tempArray[v-1].split(",");
+				var n2 = Number(csvArray3[19]);
+				if ( n2 > n1 ) {
+					tempArray2 = tempArray[v];
+					tempArray[v] = tempArray[v-1];
+					tempArray[v-1] = tempArray2;
+				}
+			}
+		}
+		//ソート後の処理
+		csvArray = new Array();
+		for(var i=0;i<tempArray.length;i++){
+			csvArray[i] = tempArray[i].split(",");
+			var data = csvArray[i];
+			//マーカー作成　画像ファイルを読み込み
+			if (data[9]=="企業主導型保育事業") {
+				image = 'icon32x32e.png';
+			} else {
+				image = 'icon32x32.png';
+			}
+      //グローバル保存　[i]をhoikusyo[i]と合わせないとダメ
+			markerArray3[i] = new google.maps.Marker({
+				position: new google.maps.LatLng( parseFloat(data[0]), parseFloat(data[1]) ),
+				map: mapObj,
+				icon: image,
+				title: data[2]
+			});
+			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
+			if (data[9]=="企業主導型保育事業") {
+				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 調査日:data[17]
+				attachMessage2(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17]);
+        //読み込んだデータをkigyoクラスに格納
+  			//前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
+  			var regexp = new RegExp(/^[0-9０-９]+$/);
+  			for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
+  				if (!regexp.test(data[j])){ data[j]="0"; }
+  			}
+  			kigyo[i] = new Kigyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
+			}
 		}
 	};
 	xhr.open("get", filename, true);
@@ -538,6 +659,16 @@ function clickRadius2(){
 }
 
 function clickCheckbox(){
+  //幼稚園マーカーはすべて灰色にする
+  for (var i=0; i<marker2Array.length; i++){
+    if (kindergarden[i].category=="1"){
+      image = 'icon32x32d2gray.png';
+    } else {
+      image = 'icon32x32dgray.png';
+    }
+    opt = { icon: image };
+    markerArray2[i].setOptions(opt);
+  }
 	//全てのクリックボックスの状況把握
 	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
 	for (var i=0;i<6;i++){
@@ -553,6 +684,7 @@ function clickCheckbox(){
 	//alert(s);
 	switch(s){
 		case      0:
+      //保育所マーカーをすべてカラーに復活する
 		  for (var i=0; i<markerArray.length; i++){
 			  if (hoikusyo[i].category=="認定こども園") {
 				    image = 'icon32x32b.png';
@@ -564,6 +696,16 @@ function clickCheckbox(){
 			  opt = { icon: image };
 			  markerArray[i].setOptions(opt);
 		  }
+      //幼稚園マーカーをすべてカラーに復活する
+      for (var i=0; i<marker2Array.length; i++){
+        if (kindergarden[i].category=="1"){
+          image = 'icon32x32d2.png';
+        } else {
+          image = 'icon32x32d.png';
+        }
+        opt = { icon: image };
+        markerArray2[i].setOptions(opt);
+      }
 		  break;
 		case      1:
 			for (var i=0; i<markerArray.length; i++){
