@@ -96,7 +96,7 @@ google.maps.event.addDomListener(window, 'load', function(){
 	//初期設定
 	var map = document.getElementById("map_canvas");
 	var options = {
-		zoom: 16,
+		zoom: 15,
 		center: new google.maps.LatLng(posY, posX),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
@@ -121,13 +121,13 @@ google.maps.event.addDomListener(window, 'load', function(){
 	mapObj.setCenter(pos);
 
 	//保育所CSVファイル読み込み
-	loadCSV1("sukusukudata.csv"); //後述の関数参照
+	//loadCSV1("sukusukudata.csv"); //後述の関数参照
 
 	//幼稚園CSVファイル読み込み
-	loadCSV("sukusukudata2.csv");
+	//loadCSV("sukusukudata2.csv");
 
   //企業主導型csvファイル読込
-	loadCSV("sukusukudata3.csv");
+	//loadCSV("sukusukudata3.csv");
 
 	//zoom_changeイベント取得
 	google.maps.event.addListener(mapObj, 'zoom_changed', function(){
