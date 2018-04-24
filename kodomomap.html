@@ -661,13 +661,19 @@ function clickRadius2(){
 function clickCheckbox(){
   //幼稚園マーカーはすべて灰色にする
   for (var i=0; i<markerArray2.length; i++){
-    if (kindergarden[i].category=="1"){
+    if (kindergarden[i].miikou=="1"){
       image = 'icon32x32d2gray.png';
     } else {
       image = 'icon32x32dgray.png';
     }
     opt = { icon: image };
     markerArray2[i].setOptions(opt);
+  }
+  //企業主導型保育事業マーカーはすべて灰色にする
+  for (var i=0; i<markerArray3.length, i++){
+    image = 'icon32x32egray.png';
+    opt = { icon: image };
+    markerArray3[i].setOptions(opt);
   }
 	//全てのクリックボックスの状況把握
 	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
@@ -705,6 +711,12 @@ function clickCheckbox(){
         }
         opt = { icon: image };
         markerArray2[i].setOptions(opt);
+      }
+      //企業主導型保育事業マーカーをすべてカラーに復活する
+      for (var i=0; i<markerArray3.length, i++){
+        image = 'icon32x32e.png';
+        opt = { icon: image };
+        markerArray3[i].setOptions(opt);
       }
 		  break;
 		case      1:
