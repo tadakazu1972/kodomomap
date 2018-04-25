@@ -311,18 +311,18 @@ function loadCSV3( filename ){
 				icon: image,
 				title: data[2]
 			});
-			company[i] = new Company(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
 			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
 			if (data[9]=="企業主導型保育事業") {
 				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 調査日:data[17]
 				attachMessage2(markerArray3[i], data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17]);
-        //読み込んだデータをkigyoクラスに格納
-  			//前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
-  			/*var regexp = new RegExp(/^[0-9０-９]+$/);
-  			for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
-  				if (!regexp.test(data[j])){ data[j]="0"; }
-  			}*/
 			}
+			//読み込んだデータをcompanyクラスに格納
+			//前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
+			var regexp = new RegExp(/^[0-9０-９]+$/);
+			for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
+				if (!regexp.test(data[j])){ data[j]="0"; }
+			}
+			company[i] = new Company(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
 		}
 	};
 	xhr.open("get", filename, true);
@@ -572,14 +572,6 @@ function clickCheckbox(){
     opt = { icon: image };
     markerArray2[i].setOptions(opt);
   }
-
-	//企業主導型保育事業マーカーをすべてカラーに復活する
-	for (var i=0; i<markerArray3.length; i++){
-		alert(company[i].one);
-		image = 'icon32x32egray.png';
-		opt = { icon: image };
-		markerArray3[i].setOptions(opt);
-	}
 
 	//全てのクリックボックスの状況把握
 	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
