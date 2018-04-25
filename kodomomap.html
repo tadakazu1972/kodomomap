@@ -13,7 +13,7 @@
 <!--jQueryライブラリ読み込み-->
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--Googleマップ生成-->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=******&region=JP&language=ja"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAAv5yWOBx4-z-Q65PBtZ4hTVedRmexHAA&region=JP&language=ja"></script>
 <script type="text/javascript">
 //スマホの時はレイアウト変更を判定するため
 var width = window.innerWidth;
@@ -153,94 +153,6 @@ google.maps.event.addDomListener(window, 'load', function(){
 		drawCircle();
 	});
 });
-
-//CSV読み込み処理
-function loadCSV( filename ){
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function(){
-		var tempArray = xhr.responseText.split("\n");
-		//バブルソート処理
-		csvArray2 = new Array();
-		csvArray3 = new Array();
-		tempArray2 = new Array();
-		var u,v;
-		for(u=0;u<tempArray.length-1;u++){
-			for(v=tempArray.length-1; v>u; v--){
-				//現時点のデータ取得
-				csvArray2 = tempArray[v].split(",");
-				var n1 = Number(csvArray2[19]);
-				//１つ前のデータ取得
-				csvArray3 = tempArray[v-1].split(",");
-				var n2 = Number(csvArray3[19]);
-				if ( n2 > n1 ) {
-					tempArray2 = tempArray[v];
-					tempArray[v] = tempArray[v-1];
-					tempArray[v-1] = tempArray2;
-				}
-			}
-		}
-		//ソート後の処理
-		csvArray = new Array();
-		for(var i=0;i<tempArray.length;i++){
-			csvArray[i] = tempArray[i].split(",");
-			var data = csvArray[i];
-			//マーカー作成　画像ファイルを読み込み
-			if (data[9]=="認定こども園") {
-			    image = 'icon32x32b.png';
-			} else if (data[9]=="地域型") {
-			    image = 'icon32x32c.png';
-			} else if (data[9]=="幼稚園") {
-				if (data[18]=="1"){
-					image = 'icon32x32d2.png';
-				} else {
-					image = 'icon32x32d.png';
-				}
-			} else if (data[9]=="企業主導型保育事業") {
-				image = 'icon32x32e.png';
-			} else {
-				image = 'icon32x32.png';
-			}
-			var marker = new google.maps.Marker({
-				position: new google.maps.LatLng( parseFloat(data[0]), parseFloat(data[1]) ),
-				map: mapObj,
-				icon: image,
-				title: data[2]
-			});
-      //グローバル保存
-      if (data[9]=="幼稚園"){
-        markerArray2.push(marker);
-      } else if (data[9]=="企業主導型保育事業"){
-        markerArray3.push(marker);
-      } else {
-			  markerArray.push(marker);
-        //保育所データであれば読み込んだデータをhoikusyoクラスに格納（幼稚園は空き状況データがないのでそもそも保存しない）
-        //前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
-        var regexp = new RegExp(/^[0-9０-９]+$/);
-        for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
-          if (!regexp.test(data[j])){ data[j]="0"; }
-        }
-        hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
-      }
-			//企業主導型保育事業の場合は、○月○日と日もcsvファイルを読み込む必要があるため、attachMessage2を呼び出す
-			if (data[9]=="企業主導型保育事業") {
-				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 調査日:data[17]
-				attachMessage2(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17]);
-        //読み込んだデータをkigyoクラスに格納
-  			//前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
-  			var regexp = new RegExp(/^[0-9０-９]+$/);
-  			for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
-  				if (!regexp.test(data[j])){ data[j]="0"; }
-  			}
-  			kigyo[i] = new Kigyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
-			} else {
-				//csvファイル　保育所名:data[2] 住所:data[4] 電話:data[7] URL:data[8] 0歳:data[10] 1歳:data[11] 2歳:data[12] 3歳:data[13] 4歳:data[14] 5歳:data[15] 現在月:data[16] 利用可能月:data[20] 区:data[6] 経度:data[0] 緯度:data[1] カテゴリー:data[9] 指定園:data[17] 新制度未移行園:data[18]
-				attachMessage(marker, data[2], data[4], data[7], data[8], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[20], data[6], data[0], data[1], data[9], data[17], data[18]);
-			}
-		}
-	};
-	xhr.open("get", filename, true);
-	xhr.send(null);
-}
 
 //保育所CSV読み込み処理
 function loadCSV1( filename ){
@@ -660,12 +572,7 @@ function clickCheckbox(){
     opt = { icon: image };
     markerArray2[i].setOptions(opt);
   }
-  //企業主導型保育事業マーカーはすべて灰色にする
-  for (var i=0; i<markerArray3.length; i++){
-    image = 'icon32x32egray.png';
-    opt = { icon: image };
-    markerArray3[i].setOptions(opt);
-  }
+
 	//全てのクリックボックスの状況把握
 	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
 	for (var i=0;i<6;i++){
