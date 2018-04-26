@@ -205,7 +205,7 @@ function loadCSV1( filename ){
       //前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
       var regexp = new RegExp(/^[0-9０-９]+$/);
       for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
-        if (!regexp.test(data[j])){ data[j]=Boolean(0); } //空き０の場合はfalseを代入
+        if (!regexp.test(data[j])){ data[j]=Boolean(1); } //空き０の場合はtrueを代入
       }
       hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
 		}
