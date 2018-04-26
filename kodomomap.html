@@ -575,11 +575,11 @@ function clickCheckbox(){
 
 	for (var i=0; i<markerArray.length; i++){
 		if (hoikusyo[i].category=="認定こども園") {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32bgray.png'; } else { image = 'icon32x32b.png'; }
+			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32b.png'; } else { image = 'icon32x32bgray.png'; }
 		} else if (hoikusyo[i].category=="地域型") {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32cgray.png'; } else { image = 'icon32x32c.png'; }
+			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32c.png'; } else { image = 'icon32x32cgray.png'; }
 		} else {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32gray.png'; } else { image = 'icon32x32.png'; }
+			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32.png'; } else { image = 'icon32x32gray.png'; }
 		}
 		opt = { icon: image };
 		markerArray[i].setOptions(opt);
