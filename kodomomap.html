@@ -205,7 +205,7 @@ function loadCSV1( filename ){
       //前処理として0歳〜5歳データを[スペース、-,ー]など半角数字、全角数字でない場合0にする。あとのswitch文の判定を円滑にするため。
       var regexp = new RegExp(/^[0-9０-９]+$/);
       for (var j=10;j<16;j++){ //data[10]~data[15]の引数に注意
-        if (!regexp.test(data[j])){ data[j]="0"; } //空き０の場合はtrueを代入
+        if (!regexp.test(data[j])){ data[j]="0"; }
       }
       hoikusyo[i] = new Hoikusyo(data[0],data[1],data[9],data[10],data[11],data[12],data[13],data[14],data[15]);
 		}
@@ -573,41 +573,6 @@ function clickCheckbox(){
     markerArray2[i].setOptions(opt);
   }
 
-	//全てのクリックボックスの状況把握
-	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
-	for (var i=0;i<6;i++){
-		if (document.checkbox.elements[i].checked){
-			flag[i]=1;
-		} else {
-			flag[i]=0;
-		}
-	}
-
-	for (var i=0; i<markerArray.length; i++){
-		if (hoikusyo[i].category=="認定こども園") {
-			if (flag[0] == hoikusyo[i].zero || flag[1] == hoikusyo[i].one || flag[2] == hoikusyo[i].two || flag[3] == hoikusyo[i].three || flag[4] == hoikusyo[i].four || flag[5] == hoikusyo[i].five){ image = 'icon32x32bgray.png'; } else { image = 'icon32x32b.png'; }
-		} else if (hoikusyo[i].category=="地域型") {
-			if (flag[0] == hoikusyo[i].zero || flag[1] == hoikusyo[i].one || flag[2] == hoikusyo[i].two || flag[3] == hoikusyo[i].three || flag[4] == hoikusyo[i].four || flag[5] == hoikusyo[i].five){ image = 'icon32x32cgray.png'; } else { image = 'icon32x32c.png'; }
-		} else {
-			if (flag[0] == hoikusyo[i].zero || flag[1] == hoikusyo[i].one || flag[2] == hoikusyo[i].two || flag[3] == hoikusyo[i].three || flag[4] == hoikusyo[i].four || flag[5] == hoikusyo[i].five){ image = 'icon32x32gray.png'; } else { image = 'icon32x32.png'; }
-		}
-		opt = { icon: image };
-		markerArray[i].setOptions(opt);
-	}
-
-	/*for (var i=0; i<markerArray.length; i++){
-		if (hoikusyo[i].category=="認定こども園") {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32b.png'; } else { image = 'icon32x32bgray.png'; }
-		} else if (hoikusyo[i].category=="地域型") {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32c.png'; } else { image = 'icon32x32cgray.png'; }
-		} else {
-			if (document.checkbox.elements[0].checked == hoikusyo[i].zero || document.checkbox.elements[1].checked == hoikusyo[i].one || document.checkbox.elements[2].checked == hoikusyo[i].two || document.checkbox.elements[3].checked == hoikusyo[i].three || document.checkbox.elements[4].checked == hoikusyo[i].four || document.checkbox.elements[5].checked == hoikusyo[i].five){ image = 'icon32x32.png'; } else { image = 'icon32x32gray.png'; }
-		}
-		opt = { icon: image };
-		markerArray[i].setOptions(opt);
-	}*/
-
-  /*
 	//全てのクリックボックスの状況把握
 	var flag = new Array(); //ここに６つの配列を用意し、０歳〜５歳がチェックされてたら１たてる
 	for (var i=0;i<6;i++){
@@ -1489,7 +1454,7 @@ function clickCheckbox(){
 			  markerArray[i].setOptions(opt);
 		  }
 		  break;
-	}*/
+	}
 }
 </script>
 <!--園名をクリックすると表示するアコーディオン生成-->
